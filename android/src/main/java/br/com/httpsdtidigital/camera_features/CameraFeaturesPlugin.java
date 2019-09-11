@@ -48,25 +48,24 @@ public class CameraFeaturesPlugin implements MethodCallHandler {
         try {
             Map<String, Object> temp = new HashMap<String, Object>();
 
-          String[] ids = manager.getCameraIdList();
-          for (String id : ids) {
-            Class<?> c = manager.getCameraCharacteristics(id).getClass();
-            Field[] fields = c.getFields();
+            String[] ids = manager.getCameraIdList();
+            for (String id : ids) {
+                Class<?> c = manager.getCameraCharacteristics(id).getClass();
+                Field[] fields = c.getFields();
 
-            for( Field field : fields ){
-              try {
-                  if(campos.contains(field.getName())){
-                      temp.put(field.getName(), field.get(c).toString());
+                for( Field field : fields ){
+                  try {
+                      if(campos.contains(field.getName())){ ;
+                          temp.put(field.getName(), field.get(c).toString());
+                      }
+                  } catch (IllegalArgumentException e1) {
+                  } catch (IllegalAccessException e) {
+                      e.printStackTrace();
                   }
-              } catch (IllegalArgumentException e1) {
-              } catch (IllegalAccessException e) {
-                  e.printStackTrace();
-              }
+                }
+                temp.toString();
+                retorno.add(temp.toString());
             }
-            temp.toString();
-          }
-
-            retorno.add(temp.toString());
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }

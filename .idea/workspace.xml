@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4b0dcae1-9a49-4e19-ac0a-299aab297764" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/android/src/main/java/br/com/httpsdtidigital/camera_features/CameraFeaturesPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/br/com/httpsdtidigital/camera_features/CameraFeaturesPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/camera_features.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/camera_features.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
