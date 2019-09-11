@@ -55,7 +55,7 @@ public class CameraFeaturesPlugin implements MethodCallHandler {
 
                 for( Field field : fields ){
                   try {
-                      if(campos.contains(field.getName())){ ;
+                      if(campos.contains(field.getName())){ 
                           temp.put(field.getName(), field.get(c).toString());
                       }
                   } catch (IllegalArgumentException e1) {
