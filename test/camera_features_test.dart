@@ -16,6 +16,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await CameraFeatures.platformVersion, '42');
+    expect(await CameraFeatures.getCameraFeatures, '42');
   });
 }
