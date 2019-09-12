@@ -2,7 +2,7 @@ name: camera_features
 description: A flutter plugin that returns to you the features of the device camera.
 version: 0.0.1
 author: GabrielChaves <gabrielbum@gmail.com>
-homepage: https://githubcom/gabrielchaves7/camera_features
+homepage: https://github.com/gabrielchaves7/camera_features
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
