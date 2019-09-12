@@ -12,7 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String _camera_info = 'Unknown';
 
   @override
   void initState() {
@@ -21,20 +21,20 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initPlatformState() async {
-    String platformVersion;
+    String camera_info;
     try {
       var teste = new List<String>();
       teste.add("FLASH_INFO_AVAILABLE");
       teste.add("LENS_FACING");
-      platformVersion = await CameraFeatures.getCameraFeatures(teste);
+      camera_info = await CameraFeatures.getCameraFeatures(teste);
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      camera_info = 'Failed to get platform version.';
     }
 
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _camera_info = camera_info;
     });
   }
 
@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: ListView(
             children: <Widget>[
-              Text('Running on: $_platformVersion\n')
+              Text(_camera_info)
             ],
           ),
         ),

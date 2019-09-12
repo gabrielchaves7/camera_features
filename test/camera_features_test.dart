@@ -7,7 +7,7 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      return '[{"cameraID: 0":{"FLASHINFOAVAILABLE":"true","LENSFACING":"1"},"cameraID: 1":{"FLASHINFOAVAILABLE":"true","LENSFACING":"1"}}]';
     });
   });
 
@@ -16,6 +16,9 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await CameraFeatures.getCameraFeatures, '42');
+    var teste = new List<String>();
+    teste.add("FLASH_INFO_AVAILABLE");
+    teste.add("LENS_FACING");
+    expect(await CameraFeatures.getCameraFeatures(teste), '[{"cameraID: 0":{"FLASHINFOAVAILABLE":"true","LENSFACING":"1"},"cameraID: 1":{"FLASHINFOAVAILABLE":"true","LENSFACING":"1"}}]');
   });
 }
