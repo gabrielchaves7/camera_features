@@ -11,6 +11,7 @@ import android.graphics.Camera;
 import android.hardware.camera2.*;
 import android.content.Context;
 import android.app.Activity;
+import android.hardware.camera2.params.StreamConfigurationMap;
 import android.os.Build;
 
 import org.json.JSONArray;
@@ -46,25 +47,23 @@ public class CameraFeaturesPlugin implements MethodCallHandler {
       CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
       ArrayList<String> retorno = new ArrayList<String>();
         try {
-            Map<String, Object> temp = new HashMap<String, Object>();
-
             String[] ids = manager.getCameraIdList();
-            for (String id : ids) {
-                Class<?> c = manager.getCameraCharacteristics(id).getClass();
-                Field[] fields = c.getFields();
+            CameraCharacteristics cameraCharacteristics = manager.getCameraCharacteristics("0");
+            List<CameraCharacteristics.Key<?>> keys = cameraCharacteristics.getKeys();
 
-                for( Field field : fields ){
-                  try {
-                      if(campos.contains(field.getName())){ 
-                          temp.put(field.getName(), field.get(c).toString());
-                      }
-                  } catch (IllegalArgumentException e1) {
-                  } catch (IllegalAccessException e) {
-                      e.printStackTrace();
-                  }
+            try {
+
+
+                for(int i =0; i< keys.size(); i ++){
+                    String nome = keys.get(i).getName().replace("android.","");
+                    String valor = cameraCharacteristics.get(keys.get(i)).toString();
+                    String jsonString = new JSONObject().put(nome, valor).toString();
+
+                    retorno.add(jsonString);
                 }
-                temp.toString();
-                retorno.add(temp.toString());
+            } catch (IllegalArgumentException e1) {
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         } catch (CameraAccessException e) {
             e.printStackTrace();
