@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /** CameraFeaturesPlugin */
@@ -38,6 +39,12 @@ public class CameraFeaturesPlugin implements MethodCallHandler {
   public void onMethodCall(MethodCall call, Result result) {
     if (call.method.equals("getCameraFeatures")) {
         List<String> campos = call.argument("fields");
+        List<String> camposRenomeados = new ArrayList<String>();
+        for (String campo : campos) {
+            camposRenomeados.add(campo.replace("_", "").toUpperCase());
+        }
+
+
       CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
       ArrayList<String> retorno = new ArrayList<String>();
         try {
@@ -50,8 +57,11 @@ public class CameraFeaturesPlugin implements MethodCallHandler {
                     JSONObject jsonString = new JSONObject();
                     for(int i =0; i< keys.size(); i ++){
                         String nome = keys.get(i).getName().replace("android.","");
-                        String valor = cameraCharacteristics.get(keys.get(i)).toString();
-                        jsonString.put(nome, valor).toString();
+                        nome = nome.replace(".", "").toUpperCase();
+                        if(camposRenomeados.contains(nome)){
+                            String valor = cameraCharacteristics.get(keys.get(i)).toString();
+                            jsonString.put(nome, valor).toString();
+                        }
                     }
                     main.put("cameraID: " + id, jsonString);
                 }
