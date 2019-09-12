@@ -7,22 +7,16 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 import android.annotation.TargetApi;
-import android.graphics.Camera;
 import android.hardware.camera2.*;
 import android.content.Context;
 import android.app.Activity;
-import android.hardware.camera2.params.StreamConfigurationMap;
 import android.os.Build;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /** CameraFeaturesPlugin */
 public class CameraFeaturesPlugin implements MethodCallHandler {
