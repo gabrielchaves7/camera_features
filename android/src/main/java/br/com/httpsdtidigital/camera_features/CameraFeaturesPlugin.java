@@ -50,17 +50,18 @@ public class CameraFeaturesPlugin implements MethodCallHandler {
             String[] ids = manager.getCameraIdList();
             CameraCharacteristics cameraCharacteristics = manager.getCameraCharacteristics("0");
             List<CameraCharacteristics.Key<?>> keys = cameraCharacteristics.getKeys();
-
+            JSONObject main = new JSONObject();
             try {
-
-
-                for(int i =0; i< keys.size(); i ++){
-                    String nome = keys.get(i).getName().replace("android.","");
-                    String valor = cameraCharacteristics.get(keys.get(i)).toString();
-                    String jsonString = new JSONObject().put(nome, valor).toString();
-
-                    retorno.add(jsonString);
+                for (String id : ids) {
+                    JSONObject jsonString = new JSONObject();
+                    for(int i =0; i< keys.size(); i ++){
+                        String nome = keys.get(i).getName().replace("android.","");
+                        String valor = cameraCharacteristics.get(keys.get(i)).toString();
+                        jsonString.put(nome, valor).toString();
+                    }
+                    main.put("cameraID: " + id, jsonString);
                 }
+                retorno.add(main.toString());
             } catch (IllegalArgumentException e1) {
             } catch (JSONException e) {
                 e.printStackTrace();
